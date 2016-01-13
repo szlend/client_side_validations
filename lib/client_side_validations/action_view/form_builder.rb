@@ -5,14 +5,18 @@ module ClientSideValidations
         def self.prepended(base)
           (base.field_helpers.map(&:to_s) - %w(apply_form_for_options! label check_box radio_button fields_for hidden_field)).each do |selector|
             base.class_eval <<-RUBY_EVAL
-              def #{selector}_with_client_side_validations(method, options = {})
+              def #{selector}(method, options = {})
                 build_validation_options(method, options)
                 options.delete(:validate)
-                #{selector}_without_client_side_validations(method, options)
+
+                # Cannot call super here, override the whole method
+                @template.send(                      #   @template.send(
+                  #{selector.inspect},               #     "text_field",
+                  @object_name,                      #     @object_name,
+                  method,                            #     method,
+                  objectify_options(options))        #     objectify_options(options))
               end
             RUBY_EVAL
-
-            base.class_eval { alias_method_chain selector, :client_side_validations }
           end
         end
 
