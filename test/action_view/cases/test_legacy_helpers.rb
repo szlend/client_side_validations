@@ -33,7 +33,7 @@ module ClientSideValidations
 
       expected = whole_form('/posts', 'new_post', 'new_post', file: true) do
         form_field('input', nil, 'post[cost]', 'hidden', '') +
-        form_field('input', 'post_cost', 'post[cost]', 'file')
+          form_field('input', 'post_cost', 'post[cost]', 'file')
       end
       assert_dom_equal expected, output_buffer
     end
