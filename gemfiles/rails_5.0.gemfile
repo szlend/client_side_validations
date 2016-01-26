@@ -2,7 +2,7 @@
 
 source "http://rubygems.org"
 
-gem "sinatra", :github => "sinatra/sinatra", :branch => "2.2.0-alpha"
+gem "sinatra", :github => "sinatra/sinatra"
 gem "rails", "~> 5.0.0.beta1.1"
 
 gemspec :path => "../"
