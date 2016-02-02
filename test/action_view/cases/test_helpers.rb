@@ -425,7 +425,7 @@ module ClientSideValidations
 
       validators = { 'post[cost]' => { presence: [{ message: "can't be blank" }] } }
       expected = whole_form('/posts', 'new_post', 'new_post', validators: validators) do
-        form_field('input', nil, 'post[cost][]', 'hidden', '')
+        form_field('input', nil, 'post[cost]', 'hidden', '')
       end
       assert_dom_equal expected, output_buffer
     end
@@ -436,7 +436,7 @@ module ClientSideValidations
       end
 
       expected = whole_form('/posts', 'new_post', 'new_post', validators: {}) do
-        form_field('input', nil, 'post[cost][]', 'hidden', '')
+        form_field('input', nil, 'post[cost]', 'hidden', '')
       end
       assert_dom_equal expected, output_buffer
     end
